@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      :root {
+        --gray: #413f4f;
+      }
+
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        font-family: sans-serif;
+      }
+
+      .order-list-container {
+        background-color: #e3faf0;
+        padding: 4px 16px 2px 16px;
+      }
+
+      .order-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto;
+      }
+
+      .grid-item {
+        padding: 0.25rem 0;
+        text-align: center;
+        /* box-shadow: -1px 2px 5px gray; */
+        font-size: 2rem;
+        cursor: pointer;
+      }
+
+      .grid-item:nth-child(1),
+      .grid-item:nth-child(2),
+      .grid-item:nth-child(3),
+      .grid-item:nth-child(4) {
+        border-top: 2px solid var(--gray);
+      }
+
+      .grid-item:nth-child(4n + 1) {
+        border-bottom: 1px solid var(--gray);
+        border-right: 1px solid var(--gray);
+      }
+
+      .grid-item:nth-child(4n + 2) {
+        border-bottom: 1px solid var(--gray);
+        border-right: 1px solid var(--gray);
+      }
+
+      .grid-item:nth-child(4n + 3) {
+        border-bottom: 1px solid var(--gray);
+        border-right: 1px solid var(--gray);
+      }
+
+      .grid-item:nth-child(4n) {
+        border-bottom: 1px solid var(--gray);
+      }
+
+      .grid-item:nth-last-child(1),
+      .grid-item:nth-last-child(2),
+      .grid-item:nth-last-child(3),
+      .grid-item:nth-last-child(4) {
+        border-bottom: 2px solid var(--gray);
+      }
+
+      h1,
+      p {
+        font-family: sans-serif;
+        text-align: center;
+        padding: 20px;
+      }
+
+      form {
+        margin-top: 3.5rem;
+      }
+
+      .txt,
+      select,
+      form > div {
+        display: block;
+        margin: 0 auto;
+        font-family: sans-serif;
+        font-size: 2rem;
+        padding: 5px;
+      }
+
+      .txt {
+        width: 80%;
+      }
+
+      select {
+        width: 83%;
+      }
+
+      form > div {
+        width: 81%;
+      }
+
+      .txt,
+      form > div {
+        margin-bottom: 10px;
+        overflow: auto;
+      }
+
+      .clearfix {
+        clear: both;
+      }
+
+      label {
+        float: left;
+        width: 10%;
+        line-height: 1.5;
+      }
+
+      .rate-value,
+      .pitch-value {
+        float: right;
+        width: 5%;
+        line-height: 1.5;
+      }
+
+      #rate,
+      #pitch {
+        float: right;
+        width: 81%;
+      }
+
+      .controls {
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      .controls button {
+        padding: 10px;
+      }
+    </style>
+    <script>
+      const data = [
+        "食べる",
+        "選ぶ",
+        "練習",
+        "経験",
+        "運動",
+        "勉強",
+        "会社",
+        "旅行",
+        "病気",
+        "友達",
+        "買う",
+        "電話",
+        "勝つ",
+        "負ける",
+        "楽しい",
+        "悲しい",
+        "高い",
+        "安い",
+        "新しい",
+        "古い",
+        "大きい",
+        "小さい",
+        "美しい",
+        "汚い",
+        "嬉しい",
+        "寂しい",
+        "好き",
+        "嫌い",
+        "上手",
+        "下手",
+        "検討",
+        "謙虚",
+        "慎重",
+        "総合",
+        "構成",
+        "権利",
+        "緊急",
+        "独自",
+        "標準",
+        "慰める",
+        "憧れる",
+        "憎む",
+        "憂鬱",
+        "憩う",
+        "憶測",
+        "懐かしい",
+        "懇願",
+        "懲りる",
+        "戦う",
+        "戦略",
+        "担当",
+        "要望",
+        "進歩",
+        "素直",
+        "転勤",
+        "疑問",
+        "論理",
+        "態度",
+        "適切",
+        "締め切り",
+        "謝罪",
+        "賛成",
+        "損害",
+        "適応",
+        "独立",
+        "評価",
+        "検証",
+        "緩和",
+        "権利",
+        "輸出",
+        "緊急",
+        "独自",
+        "標準",
+        "慰める",
+        "憧れる",
+        "憎む",
+        "憂鬱",
+        "憩う",
+        "憶測",
+        "懐かしい",
+        "懇願",
+        "懲りる",
+        "懸命",
+        "懐疑",
+      ];
+    </script>
+  </head>
+
+  <body>
+    <form>
+      <input id="txt" type="text" class="txt" />
+      <div>
+        <label for="rate">Rate</label
+        ><input type="range" min="0.5" max="2" value="1" step="0.1" id="rate" />
+        <div class="rate-value">1</div>
+        <div class="clearfix"></div>
+      </div>
+      <div>
+        <label for="pitch">Pitch</label
+        ><input type="range" min="0" max="2" value="1" step="0.1" id="pitch" />
+        <div class="pitch-value">1</div>
+        <div class="clearfix"></div>
+      </div>
+      <select></select>
+      <div class="controls">
+        <button id="play" type="submit">Play</button>
+      </div>
+    </form>
+    <div class="order-list-container">
+      <div class="order-list"></div>
+    </div>
+    <script>
+      const synth = window.speechSynthesis;
+
+      const inputForm = document.querySelector("form");
+      const inputTxt = document.querySelector(".txt");
+      const voiceSelect = document.querySelector("select");
+
+      const pitch = document.querySelector("#pitch");
+      const pitchValue = document.querySelector(".pitch-value");
+      const rate = document.querySelector("#rate");
+      const rateValue = document.querySelector(".rate-value");
+
+      let voices = [];
+
+      function populateVoiceList() {
+        voices = synth.getVoices().sort(function (a, b) {
+          const aname = a.name.toUpperCase();
+          const bname = b.name.toUpperCase();
+
+          if (aname < bname) {
+            return -1;
+          } else if (aname == bname) {
+            return 0;
+          } else {
+            return +1;
+          }
+        });
+
+        for (let i = 0; i < voices.length; i++) {
+          const option = document.createElement("option");
+          option.textContent = `${voices[i].name} (${voices[i].lang})`;
+
+          if (voices[i].default) {
+            option.textContent += " -- DEFAULT";
+          }
+
+          if (voices[i].lang === "ja-JP") {
+            option.setAttribute("selected", "selected");
+          }
+
+          option.setAttribute("data-lang", voices[i].lang);
+          option.setAttribute("data-name", voices[i].name);
+          voiceSelect.appendChild(option);
+        }
+      }
+
+      populateVoiceList();
+
+      if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = populateVoiceList;
+      }
+
+      function speak() {
+        if (synth.speaking) {
+          console.error("speechSynthesis.speaking");
+          return;
+        }
+
+        if (inputTxt.value !== "") {
+          const utterThis = new SpeechSynthesisUtterance(inputTxt.value);
+
+          utterThis.onend = function (event) {
+            console.log("SpeechSynthesisUtterance.onend");
+          };
+
+          utterThis.onerror = function (event) {
+            console.error("SpeechSynthesisUtterance.onerror");
+          };
+
+          const selectedOption =
+            voiceSelect.selectedOptions[0].getAttribute("data-name");
+
+          for (let i = 0; i < voices.length; i++) {
+            if (voices[i].name === selectedOption) {
+              utterThis.voice = voices[i];
+              break;
+            }
+          }
+          utterThis.pitch = pitch.value;
+          utterThis.rate = rate.value;
+          synth.speak(utterThis);
+        }
+      }
+
+      inputForm.onsubmit = function (event) {
+        event.preventDefault();
+
+        speak();
+
+        inputTxt.blur();
+      };
+
+      pitch.onchange = function () {
+        pitchValue.textContent = pitch.value;
+      };
+
+      rate.onchange = function () {
+        rateValue.textContent = rate.value;
+      };
+
+      voiceSelect.onchange = function () {
+        speak();
+      };
+
+      const wrapper = document.querySelector(".order-list");
+      for (let i = 0; i < data.length; i++) {
+        const item = document.createElement("div");
+        item.className = "grid-item";
+        item.innerHTML = `<span class="word">${data[i]}</span>`;
+        item.addEventListener("click", () => {
+          inputTxt.value = data[i];
+          speak();
+        });
+        wrapper.appendChild(item);
+      }
+    </script>
+  </body>
+</html>
